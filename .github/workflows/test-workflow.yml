@@ -9,8 +9,9 @@ jobs:
     steps:
     - name: Run test pwsh
       id: run_test_pwsh
+      with:
+        foo: bar
       run: |
-        echo "::set-output name=abc::def"
         Get-Input foo
         Set-Output -Name abc -Value def
       shell: pwsh
