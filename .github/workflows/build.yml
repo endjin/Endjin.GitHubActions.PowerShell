@@ -1,0 +1,12 @@
+name: build
+on:
+- push
+- workflow_dispatch
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    name: Run Pester tests
+    steps:
+    - uses: actions/checkout@v2
+    - run: pwsh -f ./module/run-tests.ps1
