@@ -12,7 +12,7 @@
 RootModule = 'Endjin.GitHubActions.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+ModuleVersion = '0.0.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -33,7 +33,7 @@ Copyright = '(c) Endjin. All rights reserved.'
 Description = 'Functions for use with GitHub Actions'
 
 # Minimum version of the PowerShell engine required by this module
-PowerShellVersion = '6.2'
+PowerShellVersion = '6.0'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''

@@ -1,0 +1,4 @@
+{ 
+    "module_manifest_path": "./module/Endjin.GitHubActions.psd1",
+    "docker_repository": "endjin/endjin.githubactions.powershell"
+} 
