@@ -5,7 +5,7 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    name: Publish to PowerShell Gallery
+    name: Publish to Docker Hub
     # only trigger for pushed tags
     if: |
       startsWith(github.event.ref, 'refs/tags/')
