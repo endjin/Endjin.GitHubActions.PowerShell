@@ -1,5 +1,11 @@
 function Set-Output
 {
+    <#
+        .SYNOPSIS
+            Sets an action's output parameter.
+        .EXAMPLE
+            Set-Output -Name foo -Value bar
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]

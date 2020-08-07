@@ -1,5 +1,11 @@
 function Get-Input
 {
+    <#
+        .SYNOPSIS
+            Reads an action's input parameter.
+        .EXAMPLE
+            Get-Input -Name foo
+    #>
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
