@@ -7,7 +7,6 @@ try {
         Install-Module Pester -RequiredVersion $pesterVer -Force -Scope CurrentUser
     }
     Import-Module Pester
-    Remove-Module Endjin.PRAutoflow -ErrorAction SilentlyContinue
     $results = Invoke-Pester $here -PassThru
 
     if ($results.FailedCount -gt 0) {
