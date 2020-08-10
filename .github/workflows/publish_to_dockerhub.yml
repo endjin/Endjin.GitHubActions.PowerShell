@@ -10,10 +10,10 @@ jobs:
     if: |
       startsWith(github.event.ref, 'refs/tags/')
     outputs:
-      semver: ${{ steps.gitversion.outputs.semver }}
-      major: ${{ steps.gitversion.outputs.major }}
-      majorMinor: ${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}
-      preReleaseTag: ${{ steps.gitversion.outputs.preReleaseTag }}
+      semver: ${{ steps.run_gitversion.outputs.semver }}
+      major: ${{ steps.run_gitversion.outputs.major }}
+      majorMinor: ${{ steps.run_gitversion.outputs.major }}.${{ steps.run_gitversion.outputs.minor }}
+      preReleaseTag: ${{ steps.run_gitversion.outputs.preReleaseTag }}
     steps:
     - uses: actions/checkout@v2
       with:
