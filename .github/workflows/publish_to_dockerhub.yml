@@ -51,4 +51,13 @@ jobs:
         username: ${{ secrets.ENDJIN_DOCKERHUB_USERNAME  }}
         password: ${{ secrets.ENDJIN_DOCKERHUB_ACCESSTOKEN  }}
         repository: ${{ steps.get_config.outputs.docker_repository }}
-        tags: ${{ needs.run_gitversion.outputs.semver }},${{ needs.run_gitversion.outputs.major }},${{ needs.run_gitversion.outputs.majorMinor }}
+        tags: ${{ needs.run_gitversion.outputs.semver }}
+
+    - name: Tag Docker Hub image with Major and MajorMinor tags
+      if: needs.run_gitversion.outputs.prereleaseTag == ''
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.ENDJIN_DOCKERHUB_USERNAME  }}
+        password: ${{ secrets.ENDJIN_DOCKERHUB_ACCESSTOKEN  }}
+        repository: ${{ steps.get_config.outputs.docker_repository }}
+        tags: ${{ needs.run_gitversion.outputs.major }},${{ needs.run_gitversion.outputs.majorMinor }}
