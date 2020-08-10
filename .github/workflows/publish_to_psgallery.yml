@@ -4,7 +4,7 @@ on:
 - workflow_dispatch
 
 jobs:
-  publish:
+  publish_to_psgallery:
     runs-on: ubuntu-latest
     name: Publish to PowerShell Gallery
     # only trigger for pushed tags
@@ -37,7 +37,7 @@ jobs:
     - run: |
         Update-ModuleManifest -Path ${{ steps.get_config.outputs.module_manifest_path }} `
                               -ModuleVersion ${{ steps.run_gitversion.outputs.gitversion_MajorMinorPatch }} `
-                              -Prerelease ${{ steps.run_gitversion.outputs.gitversion_NuGetPreReleaseTag }} `
+                              -Prerelease "${{ steps.run_gitversion.outputs.gitversion_NuGetPreReleaseTag }}" `
                               -FunctionsToExport @("*") `
                               -CmdletsToExport @() `
                               -AliasesToExport @()
