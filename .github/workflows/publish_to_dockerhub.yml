@@ -3,12 +3,36 @@ on:
 - push
 
 jobs:
-  publish:
+  run_gitversion:
     runs-on: ubuntu-latest
-    name: Publish to Docker Hub
+    name: Run GitVersion
     # only trigger for pushed tags
     if: |
       startsWith(github.event.ref, 'refs/tags/')
+    outputs:
+      semver: ${{ steps.gitversion.outputs.semver }}
+      major: ${{ steps.gitversion.outputs.major }}
+      majorMinor: ${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}
+      preReleaseTag: ${{ steps.gitversion.outputs.preReleaseTag }}
+    steps:
+    - uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.x'
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.2
+      with:
+        versionSpec: '5.2.x'
+    - uses: actions/checkout@v2
+    - name: Fetch all history for all tags and branches
+      run: git fetch --prune --unshallow
+    - name: Use GitVersion
+      id: gitversion 
+      uses: gittools/actions/gitversion/execute@v0.9.2
+
+  publish:
+    runs-on: ubuntu-latest
+    name: Publish to Docker Hub
+    needs: run_gitversion
     steps:
     - uses: actions/checkout@v2
 
@@ -26,4 +50,4 @@ jobs:
         username: ${{ secrets.ENDJIN_DOCKERHUB_USERNAME  }}
         password: ${{ secrets.ENDJIN_DOCKERHUB_ACCESSTOKEN  }}
         repository: ${{ steps.get_config.outputs.docker_repository }}
-        tag_with_ref: true
+        tags: ${{ needs.run_gitversion.outputs.semver }},${{ needs.run_gitversion.outputs.major }},${{ needs.run_gitversion.outputs.majorMinor }}

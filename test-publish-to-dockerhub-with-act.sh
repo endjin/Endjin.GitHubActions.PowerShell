@@ -1,0 +1,1 @@
+act push -e tag-event.json -j run_gitversion -j publish
