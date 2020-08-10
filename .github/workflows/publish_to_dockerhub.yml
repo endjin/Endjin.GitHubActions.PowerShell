@@ -28,7 +28,7 @@ jobs:
     - name: Run GitVersion
       id: run_gitversion
       run: |
-        pwsh -noprofile -c '(dotnet-gitversion | ConvertFrom-Json).psobject.properties | % { echo ("::set-output name=gitversion_{0}::{1}" -f $_.name, $_.value) }'
+        pwsh -noprofile -c '(dotnet-gitversion | ConvertFrom-Json).psobject.properties | % { echo ("::set-output name={0}::{1}" -f $_.name, $_.value) }'
 
   publish_to_dockerhub:
     runs-on: ubuntu-latest
