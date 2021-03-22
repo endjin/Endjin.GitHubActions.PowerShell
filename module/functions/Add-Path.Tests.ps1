@@ -6,7 +6,6 @@ Describe 'Add-Path Tests' {
 
     $env:GITHUB_PATH = "TestDrive:/github_path.txt"
     
-    #Mock Write-Information { } -Verifiable -ParameterFilter { $InputObject -eq "`n::add-path::C:\foo\bar" }
     Add-Path -Path "C:\foo\bar"
 
     It 'should add the path to the correct file' {
