@@ -17,5 +17,5 @@ function Set-Output
         $Value
     )
     
-    Write-Output ("`n::set-output name={0}::{1}" -f $Name, $Value)
+    Write-Information ("`n::set-output name={0}::{1}" -f $Name, $Value) -InformationAction Continue
 }

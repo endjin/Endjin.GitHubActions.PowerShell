@@ -14,5 +14,5 @@ function Log-Debug
         $Message
     )
     
-    Write-Output ("`n::debug::{0}" -f $Message)
+    Write-Information ("`n::debug::{0}" -f $Message) -InformationAction Continue
 }

@@ -4,7 +4,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 
 Describe 'Add-Mask Tests' {
     
-    Mock Write-Output { } -Verifiable -ParameterFilter { $InputObject -eq "`n::add-mask::Super Secret" }
+    Mock Write-Information { } -Verifiable -ParameterFilter { $MessageData -eq "`n::add-mask::Super Secret" }
     Add-Mask -Value "Super Secret"
 
     It 'should output the correct message' {

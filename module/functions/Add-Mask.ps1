@@ -14,5 +14,5 @@ function Add-Mask
         $Value
     )
     
-    Write-Output ("`n::add-mask::{0}" -f $Value)
+    Write-Information ("`n::add-mask::{0}" -f $Value) -InformationAction Continue
 }

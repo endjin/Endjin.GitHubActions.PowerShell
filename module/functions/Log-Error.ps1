@@ -28,8 +28,8 @@ function Log-Error
     )
     
     if ($PSCmdlet.ParameterSetName -eq "default") {
-        Write-Output ("`n::error::{0}" -f $Message)
+        Write-Information ("`n::error::{0}" -f $Message) -InformationAction Continue
     } elseif ($PSCmdlet.ParameterSetName -eq "file") {
-        Write-Output ("`n::error file={0},line={1},col={2}::{3}" -f $FileName, $Line, $Column, $Message)
+        Write-Information ("`n::error file={0},line={1},col={2}::{3}" -f $FileName, $Line, $Column, $Message) -InformationAction Continue
     }
 }

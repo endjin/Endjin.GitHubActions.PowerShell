@@ -4,7 +4,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 
 Describe 'Log-Error Tests' {
     
-    Mock Write-Output { } -Verifiable -ParameterFilter { $InputObject -eq "`n::error::Missing semicolon" }
+    Mock Write-Information { } -Verifiable -ParameterFilter { $MessageData -eq "`n::error::Missing semicolon" }
     Log-Error -Message "Missing semicolon"
 
     It 'should output the correct message' {
@@ -14,7 +14,7 @@ Describe 'Log-Error Tests' {
 
 Describe 'Log-Error with file Tests' {
     
-    Mock Write-Output { } -Verifiable -ParameterFilter { $InputObject -eq "`n::error file=foo.js,line=10,col=5::Missing semicolon" }
+    Mock Write-Information { } -Verifiable -ParameterFilter { $MessageData -eq "`n::error file=foo.js,line=10,col=5::Missing semicolon" }
     Log-Error -Message "Missing semicolon" -FileName "foo.js" -Line 10 -Column 5
 
     It 'should output the correct message' {

@@ -4,7 +4,7 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 
 Describe 'Log-Debug Tests' {
     
-    Mock Write-Output { } -Verifiable -ParameterFilter { $InputObject -eq "`n::debug::Setting the foo variable..." }
+    Mock Write-Information { } -Verifiable -ParameterFilter { $MessageData -eq "`n::debug::Setting the foo variable..." }
     Log-Debug -Message "Setting the foo variable..."
 
     It 'should output the correct message' {
