@@ -1,6 +1,7 @@
 name: publish_to_dockerhub
 on:
 - push
+- workflow_dispatch
 
 jobs:
   run_gitversion:
@@ -20,14 +21,15 @@ jobs:
         fetch-depth: 0
     - uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '3.1.x'
+        dotnet-version: '3.1.402'
     - name: Install GitVersion
       run: |
-        dotnet tool install -g GitVersion.Tool --version 5.2.4
-        echo "::add-path::/github/home/.dotnet/tools"    
+        dotnet tool install -g GitVersion.Tool --version 5.6.6
+        echo "/github/home/.dotnet/tools" >> $GITHUB_PATH
     - name: Run GitVersion
       id: run_gitversion
       run: |
+        pwsh -noprofile -c 'dotnet-gitversion /diag'
         pwsh -noprofile -c '(dotnet-gitversion | ConvertFrom-Json).psobject.properties | % { echo ("::set-output name={0}::{1}" -f $_.name, $_.value) }'
 
   publish_to_dockerhub:
@@ -39,11 +41,9 @@ jobs:
 
     - name: Read workflow configuration
       id: get_config
-      run: |
-        config=`cat .workflow-config.json`
-        echo "::set-output name=configJson::$config"
-        DOCKER_REPOSITORY=`echo $(jq -r .docker_repository <<< $config)`
-        echo "::set-output name=docker_repository::$DOCKER_REPOSITORY"
+      uses: endjin/pr-autoflow/actions/read-configuration@v1
+      with:
+        config_file: .github/config/docker.json
 
     - name: Push to Docker Hub
       uses: docker/build-push-action@v1
