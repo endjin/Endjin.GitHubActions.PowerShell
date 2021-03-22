@@ -19,5 +19,7 @@ function Export-Variable
         $Value
     )
     
-    Write-Output ("`n::set-env name={0}::{1}" -f $Name, $Value)
+    Add-Content -Path $env:GITHUB_ENV `
+                -Value ("{0}={1}" -f $Name, $Value) `
+                -Encoding ascii
 }

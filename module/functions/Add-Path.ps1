@@ -14,5 +14,7 @@ function Add-Path
         $Path
     )
     
-    Write-Output ("`n::add-path::{0}" -f $Path)
+    Add-Content -Path $env:GITHUB_PATH `
+                -Value $Path `
+                -Encoding ascii
 }
