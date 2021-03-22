@@ -28,8 +28,8 @@ function Log-Warning
     )
     
     if ($PSCmdlet.ParameterSetName -eq "default") {
-        Write-Output ("`n::warning::{0}" -f $Message)
+        Write-Information ("`n::warning::{0}" -f $Message) -InformationAction Continue
     } elseif ($PSCmdlet.ParameterSetName -eq "file") {
-        Write-Output ("`n::warning file={0},line={1},col={2}::{3}" -f $FileName, $Line, $Column, $Message)
+        Write-Information ("`n::warning file={0},line={1},col={2}::{3}" -f $FileName, $Line, $Column, $Message) -InformationAction Continue
     }
 }
