@@ -17,5 +17,5 @@ function Set-Output
         $Value
     )
     
-    Write-Information ("`n::set-output name={0}::{1}" -f $Name, $Value) -InformationAction Continue
+    Write-Output "$Name=$Value" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding ascii -Append
 }
