@@ -120,7 +120,7 @@ $SkipPublish = $false
 $ContainersToBuild = @(
     @{
         Dockerfile = "Dockerfile"
-        ImageName = "endjin/endjin.githubactions.powershell"
+        ImageName = "endjin.githubactions.powershell"
         ContextDir = "."
         Arguments = @{}
     }
