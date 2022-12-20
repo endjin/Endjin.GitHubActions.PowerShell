@@ -1,6 +1,6 @@
 name: publish_to_dockerhub
 on:
-- push
+# - push
 - workflow_dispatch
 
 jobs:

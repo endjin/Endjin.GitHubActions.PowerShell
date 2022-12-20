@@ -1,6 +1,6 @@
 name: publish_to_psgallery
 on:
-- push
+# - push
 - workflow_dispatch
 
 jobs:
