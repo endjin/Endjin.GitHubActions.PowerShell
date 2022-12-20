@@ -17,5 +17,5 @@ function Set-Output
         $Value
     )
     
-    Write-Output "$Name=$Value" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding ascii -Append
+    "$Name=$Value" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
 }
