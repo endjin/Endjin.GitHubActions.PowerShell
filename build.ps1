@@ -87,7 +87,7 @@ if (!($BuildModulePath)) {
     if (!(Get-Module -ListAvailable Endjin.RecommendedPractices.Build | ? { $_.Version -eq $BuildModuleVersion })) {
         Write-Information "Installing 'Endjin.RecommendedPractices.Build' module..."
         # Install-Module Endjin.RecommendedPractices.Build -RequiredVersion $BuildModuleVersion -Scope CurrentUser -Force -Repository PSGallery
-        Install-Module Endjin.RecommendedPractices.Build -RequiredVersion "1.1.2-beta.1" -Scope CurrentUser -Force -Repository PSGallery -AllowPrerelease
+        Install-Module Endjin.RecommendedPractices.Build -RequiredVersion "1.1.2-beta0001" -Scope CurrentUser -Force -Repository PSGallery -AllowPrerelease
     }
     $BuildModulePath = "Endjin.RecommendedPractices.Build"
 }
