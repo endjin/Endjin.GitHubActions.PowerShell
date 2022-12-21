@@ -39,6 +39,7 @@ jobs:
         fetch-depth: 0
 
     - id: run_build
+      name: Run build.ps1
       run: |
         $ErrorActionPreference = "Stop"
 
@@ -54,8 +55,8 @@ jobs:
       env:
         GIT_REF: ${{ github.ref }}
         FORCE_PUBLISH: ${{ github.event.inputs.force_publish }}
-        BUILDVAR_DockerHubUsername: ${{ secrets.ENDJIN_DOCKERHUB_USERNAME }}
-        BUILDVAR_DockerHubPassword: ${{ secrets.ENDJIN_DOCKERHUB_ACCESSTOKEN }}
+        BUILDVAR_DockerRegistryUsername: ${{ secrets.ENDJIN_DOCKERHUB_USERNAME }}
+        BUILDVAR_DockerRegistryPassword: ${{ secrets.ENDJIN_DOCKERHUB_ACCESSTOKEN }}
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2

@@ -49,10 +49,10 @@ param (
     [string] $LogLevel = "minimal",
 
     [Parameter()]
-    [string] $BuildModulePath,
+    [string] $BuildModulePath = "C:\_DATA\code\Endjin.RecommendedPractices.Build\module\Endjin.RecommendedPractices.Build.psd1",
 
     [Parameter()]
-    [version] $BuildModuleVersion = "1.1.1",
+    [version] $BuildModuleVersion = "1.1.2",
 
     [Parameter()]
     [version] $InvokeBuildModuleVersion = "5.10.1"
@@ -86,7 +86,8 @@ if ($MyInvocation.ScriptName -notlike '*Invoke-Build.ps1') {
 if (!($BuildModulePath)) {
     if (!(Get-Module -ListAvailable Endjin.RecommendedPractices.Build | ? { $_.Version -eq $BuildModuleVersion })) {
         Write-Information "Installing 'Endjin.RecommendedPractices.Build' module..."
-        Install-Module Endjin.RecommendedPractices.Build -RequiredVersion $BuildModuleVersion -Scope CurrentUser -Force -Repository PSGallery
+        # Install-Module Endjin.RecommendedPractices.Build -RequiredVersion $BuildModuleVersion -Scope CurrentUser -Force -Repository PSGallery
+        Install-Module Endjin.RecommendedPractices.Build -RequiredVersion "1.1.2-beta.1" -Scope CurrentUser -Force -Repository PSGallery -AllowPrerelease
     }
     $BuildModulePath = "Endjin.RecommendedPractices.Build"
 }
