@@ -49,7 +49,7 @@ param (
     [string] $LogLevel = "minimal",
 
     [Parameter()]
-    [string] $BuildModulePath = "C:\_DATA\code\Endjin.RecommendedPractices.Build\module\Endjin.RecommendedPractices.Build.psd1",
+    [string] $BuildModulePath,
 
     [Parameter()]
     [version] $BuildModuleVersion = "1.1.2",
