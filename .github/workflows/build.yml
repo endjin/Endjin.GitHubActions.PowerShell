@@ -50,6 +50,7 @@ jobs:
         $doPublish = $env:GIT_REF.StartsWith("refs/tags/") -or $env:FORCE_PUBLISH -eq "true"
         $entrypointTasks = $doPublish ? @("FullBuildAndPublish") : @("FullBuild")
 
+        $env:DockerRegistryPassword | docker login -u $env:BUILDVAR_DockerRegistryUsername --password-stdin
         pwsh -f ./build.ps1 -Tasks $entrypointTasks
       shell: pwsh
       env:
@@ -57,7 +58,7 @@ jobs:
         FORCE_PUBLISH: ${{ github.event.inputs.force_publish }}
         BUILDVAR_ContainerRegistryPublishPrefix: endjin
         BUILDVAR_DockerRegistryUsername: ${{ secrets.ENDJIN_DOCKERHUB_USERNAME }}
-        BUILDVAR_DockerRegistryPassword: ${{ secrets.ENDJIN_DOCKERHUB_ACCESSTOKEN }}
+        DockerRegistryPassword: ${{ secrets.ENDJIN_DOCKERHUB_ACCESSTOKEN }}
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
