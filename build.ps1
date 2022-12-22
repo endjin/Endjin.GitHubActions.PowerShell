@@ -131,7 +131,14 @@ $UseAcrTasks = $false                   # when true, images will be build & publ
 $ContainerRegistryPublishPrefix = ""    # optional additional tag details to prepend to image name when publishing to a container registry
 $ContainerImageVersionOverride = ""     # override the GitVersion-generated SemVer used for tagging container images
 $PesterTestsDir = "$here/module"
-
+$PowerShellModulesToPublish = @(
+    @{
+        ModulePath = "$here/module/Endjin.GitHubActions.psd1"
+        FunctionsToExport = @("*")
+        CmdletsToExport = @()
+        AliasesToExport = @()
+    }
+)
 
 # Synopsis: Build, Test and Package
 task . FullBuild
