@@ -4,6 +4,20 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 
 Describe 'Export-Variable Tests' {
     
+    # Ensure we don't permanently pollute the environment
+    BeforeAll {
+        $env:GITHUB_ENV_ORIG = $env:GITHUB_ENV
+    }
+    AfterAll {
+        if ($env:GITHUB_ENV_ORIG) {
+            $env:GITHUB_ENV = $env:GITHUB_ENV_ORIG
+        }
+        else {
+            Remove-Item env:/GITHUB_ENV
+        }
+        Get-Item env:/GITHUB_ENV_ORIG -ErrorAction Ignore | Remove-Item
+    }
+
     $env:GITHUB_ENV = "TestDrive:/github_env.txt"
 
     Export-Variable -Name foo -Value bar
