@@ -51,14 +51,19 @@ jobs:
         $entrypointTasks = $doPublish ? @("FullBuildAndPublish") : @("FullBuild")
 
         $env:DockerRegistryPassword | docker login -u $env:BUILDVAR_DockerRegistryUsername --password-stdin
-        pwsh -f ./build.ps1 -Tasks $entrypointTasks
+        if ($LASTEXITCODE -ne 0) {
+          Write-Error "Unable to login to Docker registry - check previous logs" -ErrorAction Stop
+        }
+
+        & ./build.ps1 -Tasks $entrypointTasks
       shell: pwsh
       env:
         GIT_REF: ${{ github.ref }}
         FORCE_PUBLISH: ${{ github.event.inputs.force_publish }}
-        BUILDVAR_ContainerRegistryPublishPrefix: endjin
+        BUILDVAR_ContainerRegistryPublishPrefix: endjin     # use the org name as the repo, rather than the username
         BUILDVAR_DockerRegistryUsername: ${{ secrets.ENDJIN_DOCKERHUB_USERNAME }}
         DockerRegistryPassword: ${{ secrets.ENDJIN_DOCKERHUB_ACCESSTOKEN }}
+        BUILDVAR_PowerShellGalleryApiKey: ${{ secrets.ENDJIN_PSGALLERY_APIKEY }}
 
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
