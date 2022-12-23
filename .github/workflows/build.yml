@@ -20,10 +20,6 @@ concurrency:
   group: ci-${{ github.ref }}-1
   cancel-in-progress: true
 
-# permissions:
-#   id-token: read
-#   contents: read
-
 jobs:
   build:
     runs-on: ubuntu-latest
