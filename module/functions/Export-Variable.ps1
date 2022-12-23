@@ -19,7 +19,5 @@ function Export-Variable
         $Value
     )
     
-    Add-Content -Path $env:GITHUB_ENV `
-                -Value ("{0}={1}" -f $Name, $Value) `
-                -Encoding ascii
+    "$Name=$Value" | Out-File -Path $env:GITHUB_ENV -Encoding utf8 -Append
 }

@@ -14,7 +14,5 @@ function Add-Path
         $Path
     )
     
-    Add-Content -Path $env:GITHUB_PATH `
-                -Value $Path `
-                -Encoding ascii
+    $Path | Out-File -Path $env:GITHUB_PATH -Encoding utf8 -Append
 }

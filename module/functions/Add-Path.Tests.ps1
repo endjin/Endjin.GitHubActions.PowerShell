@@ -4,6 +4,20 @@ $sut = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 
 Describe 'Add-Path Tests' {
 
+    # Ensure we don't permanently pollute the environment
+    BeforeAll {
+        $env:GITHUB_PATH_ORIG = $env:GITHUB_PATH
+    }
+    AfterAll {
+        if ($env:GITHUB_PATH_ORIG) {
+            $env:GITHUB_PATH = $env:GITHUB_PATH_ORIG
+        }
+        else {
+            Remove-Item env:/GITHUB_PATH
+        }
+        Get-Item env:/GITHUB_PATH_ORIG -ErrorAction Ignore | Remove-Item
+    }
+
     $env:GITHUB_PATH = "TestDrive:/github_path.txt"
     
     Add-Path -Path "C:\foo\bar"
